@@ -1,0 +1,8 @@
+/__init__.pyc
+/cookies.pyc
+/items.pyc
+/middleware.pyc
+/pipelines.pyc
+/settings.pyc
+/user_agents.pyc
+/user_proxy.pyc
