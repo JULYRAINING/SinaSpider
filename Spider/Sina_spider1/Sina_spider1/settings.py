@@ -5,16 +5,16 @@ SPIDER_MODULES = ['Sina_spider1.spiders']
 NEWSPIDER_MODULE = 'Sina_spider1.spiders'
 
 DOWNLOADER_MIDDLEWARES = {
-    #"Sina_spider1.middleware.UserAgentMiddleware": 401,
-    #"Sina_spider1.middleware.CookiesMiddleware": 402,
-    #"Sina_spider1.middleware.ProcyMiddleware": 403,
+    "Sina_spider1.middleware.UserAgentMiddleware": 401,
+    "Sina_spider1.middleware.CookiesMiddleware": 402,
+    #"Sina_spider1.middleware.ProxyMiddleware": 403,
 }
 
 ITEM_PIPELINES = {
     'Sina_spider1.pipelines.MongoDBPipleline': 300,
 }
 
-# DOWNLOAD_DELAY = 2  # 间隔时间
+DOWNLOAD_DELAY = 3  # 间隔时间
 # CONCURRENT_ITEMS = 1000
 # CONCURRENT_REQUESTS = 100
 # REDIRECT_ENABLED = False

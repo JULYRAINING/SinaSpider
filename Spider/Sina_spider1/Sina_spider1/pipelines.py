@@ -15,8 +15,9 @@ class MongoDBPipleline(object):
         self.Fans = db["Fans"]
         
         db_sina_search = client["Sina_Search"]
-        self.search = db_sina_search["Search"]
-
+        #self.search = db_sina_search["Search"]
+        self.search = db_sina_search["Search_one"]
+        
     def process_item(self, item, spider):
         """ 判断item的类型，并作相应的处理，再入数据库 """
         

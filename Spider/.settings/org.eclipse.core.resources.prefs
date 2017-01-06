@@ -1,4 +1,10 @@
 eclipse.preferences.version=1
+encoding//IpProxy/IpProxy/items.py=utf-8
+encoding//IpProxy/IpProxy/middlewares.py=utf-8
+encoding//IpProxy/IpProxy/pipelines.py=utf-8
+encoding//IpProxy/IpProxy/settings.py=utf-8
+encoding//IpProxy/IpProxy/spiders/ipspider.py=utf-8
+encoding//IpProxy/IpProxy/user_agents.py=utf-8
 encoding//Sina_spider1/Sina_spider1/cookies.py=utf-8
 encoding//Sina_spider1/Sina_spider1/items.py=utf-8
 encoding//Sina_spider1/Sina_spider1/middleware.py=utf-8
@@ -7,4 +13,4 @@ encoding//Sina_spider1/Sina_spider1/settings.py=utf-8
 encoding//Sina_spider1/Sina_spider1/spiders/sina_search.py=utf-8
 encoding//Sina_spider1/Sina_spider1/spiders/spiders.py=utf-8
 encoding//Sina_spider1/Sina_spider1/user_agents.py=utf-8
-encoding//Sina_spider1/Sina_spider1/user_proxy.py=utf-8
+encoding//Sina_spider1/Sina_spider1/user_agents_pc.py=utf-8

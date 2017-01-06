@@ -1,8 +1,8 @@
 # encoding=utf-8
 import random
+
+from user_agents_pc import agents
 from cookies import cookies
-from user_agents import agents
-from user_proxy import user_proxy
 
 class UserAgentMiddleware(object):
     """ 换User-Agent """
@@ -19,9 +19,15 @@ class CookiesMiddleware(object):
         cookie = random.choice(cookies)
         request.cookies = cookie
         
-class ProcyMiddleware(object):
+class ProxyMiddleware(object):
+    
+    def __init__(self):
+        
+        file = open('E:\Code\Git\SinaSpider\Spider\Sina_spider1\Sina_spider1\proxy_ip.txt')
+        list = file.readlines()
+        self.proxys = list
     
     def process_request(self, request, spider):
-        request.meta['proxy'] = random.choice(user_proxy)
-        
+        request.meta['proxy'] = random.choice(self.proxys)[:-1]
+
         

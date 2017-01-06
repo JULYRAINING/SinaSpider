@@ -58,3 +58,6 @@ class SearchItem(Item):
     mid = Field()
     longpost = Field()
     long = Field()
+    locate_link = Field()
+    locate_name = Field()
+    userId = Field()
