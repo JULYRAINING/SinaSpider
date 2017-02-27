@@ -28,8 +28,8 @@ myWeiBo = [
 	
 ]
 '''
-#myWeiBo = [{'no': '13649844460', 'psw': 'q123123'},]
-myWeiBo = [{'no': '13261470918', 'psw': 'heaven7more'},]
+myWeiBo = [{'no': '13649844460', 'psw': 'q123123'},]
+#myWeiBo = [{'no': '13261470918', 'psw': ''},]
 def getCookies(weibo):
     """ 获取Cookies """
     cookies = []

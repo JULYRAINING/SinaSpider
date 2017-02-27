@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
+encoding//GetData_Sina/GetData_Sina/middlewares.py=utf-8
+encoding//GetData_Sina/GetData_Sina/settings.py=utf-8
+encoding//GetData_Sina/GetData_Sina/spiders/getData.py=utf-8
 encoding//IpProxy/IpProxy/items.py=utf-8
 encoding//IpProxy/IpProxy/middlewares.py=utf-8
 encoding//IpProxy/IpProxy/pipelines.py=utf-8

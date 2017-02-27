@@ -8,15 +8,17 @@ from items import InformationItem, TweetsItem, FollowsItem, FansItem, SearchItem
 class MongoDBPipleline(object):
     def __init__(self):
         client = pymongo.MongoClient("localhost", 27017)
-        db = client["Sina_topic"]
-        self.Information = db["Information"]
-        self.Tweets = db["Tweets"]
-        self.Follows = db["Follows"]
-        self.Fans = db["Fans"]
+        #db = client["Sina_topic"]
+        #self.Information = db["Information"]
+        #self.Tweets = db["Tweets"]
+        #self.Follows = db["Follows"]
+        #self.Fans = db["Fans"]
         
-        db_sina_search = client["Sina_Search"]
+        #db_sina_search = client["Sina_Search"]
+        db_sina_search = client["Sina_Search_Guest"]
         #self.search = db_sina_search["Search"]
-        self.search = db_sina_search["Search_one"]
+        self.search = db_sina_search["weibo"]
+        self.Time = db_sina_search["Time"]
         
     def process_item(self, item, spider):
         """ 判断item的类型，并作相应的处理，再入数据库 """
@@ -31,6 +33,8 @@ class MongoDBPipleline(object):
             
             try:
                 self.search.insert(dict(item))
+                self.Time.insert({'date':item['date']})
+                print 'saved'
             except Exception:
                 pass
         if isinstance(item, InformationItem):

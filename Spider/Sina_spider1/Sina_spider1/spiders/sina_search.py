@@ -15,16 +15,33 @@ class SinaSearchSpider(scrapy.Spider):
     start_urls = ['http://weibo.com/']
 
     def start_requests(self):
+        '''
+        for a in range(2010, 2011):
+            for b in range(12):
+                for c in range(30):
+                    for d in range(24):
+                        year = a
+                        month = b+1
+                        day = c + 1
+                        hour = d
+                        url = 'http://s.weibo.com/weibo/%%25E9%%259B%%25BE%%25E9%%259C%%25BE&typeall=1&suball=1&timescope=custom:%(year)s-%(month)s-%(day)s-%(hour)s:%(year)s-%(month)s-%(day)s-%(hour)s&Refer=g' %({'year':year, 'month':month, 'day':day, 'hour':hour})
+                        #url = 'http://s.weibo.com/weibo/%25E9%259B%25BE%25E9%259C%25BE&typeall=1&suball=1&timescope=custom:%(year)s-%(month)s-%(day)s-%(hour)s:%(year)s-%(month)s-%(day)s-%(hour)s&Refer=g' %(year, month, day, hour)
+
+                        #cookie = 'SINAGLOBAL=2460208457668.2603.1483357373892; wvr=6; SSOLoginState=1483430940; SWB=usrmdinst_0; _s_tentry=-; Apache=4632757037593.315.1483494311046; ULV=1483494312037:2:2:2:4632757037593.315.1483494311046:1483357373904; SCF=Ahc3WlFibkJSwdZbEvzgNM34q-lYcfvJ6_OMUk-MUeu4D1Zwyj3akrtATa-3OfF0vFN0Qa-iLHHni5CMi1-aIRM.; SUB=_2A251amUYDeRxGeVG6VEW9i7IwzSIHXVWHtHQrDV8PUNbmtANLW7RkW9gqLoddIzEHY3glck9m9hFBGwCJg..; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWSzG75WaU6Wd_.025ROw535JpX5KMhUgL.FoeReoeNSo5X1hn2dJLoI7_ZUgp4MJ8DdJLV97tt; SUHB=0N2110U7NxGDdY; ALF=1515145416; WBStorage=194a5e7d191964cc|undefined; UOR=,,login.sina.com.cn'
+                        #cookie_dict = dict((line.split('=') for line in cookie.strip().split(";")))
+                        #cookies = cookie_dict,
+                        
+                        print(url)
+                        yield Request(url = url, callback = self.parse0)
         
-        url = 'http://s.weibo.com/weibo/%25E9%259B%25BE%25E9%259C%25BE&typeall=1&suball=1&timescope=custom:2017-01-03:2017-01-03&page=40'
-        #url = 'http://s.weibo.com/weibo/%25E9%259B%25BE%25E9%259C%25BE&typeall=1&suball=1&timescope=custom:2017-01-01:2017-01-02&page=41'
+        ''' 
         
-        #cookie = 'SINAGLOBAL=2460208457668.2603.1483357373892; wvr=6; SSOLoginState=1483430940; SWB=usrmdinst_0; _s_tentry=-; Apache=4632757037593.315.1483494311046; ULV=1483494312037:2:2:2:4632757037593.315.1483494311046:1483357373904; SCF=Ahc3WlFibkJSwdZbEvzgNM34q-lYcfvJ6_OMUk-MUeu4D1Zwyj3akrtATa-3OfF0vFN0Qa-iLHHni5CMi1-aIRM.; SUB=_2A251amUYDeRxGeVG6VEW9i7IwzSIHXVWHtHQrDV8PUNbmtANLW7RkW9gqLoddIzEHY3glck9m9hFBGwCJg..; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WWSzG75WaU6Wd_.025ROw535JpX5KMhUgL.FoeReoeNSo5X1hn2dJLoI7_ZUgp4MJ8DdJLV97tt; SUHB=0N2110U7NxGDdY; ALF=1515145416; WBStorage=194a5e7d191964cc|undefined; UOR=,,login.sina.com.cn'
-        #cookie_dict = dict((line.split('=') for line in cookie.strip().split(";")))
-        #cookies = cookie_dict,
+        for a in range(1, 2):
+            #url = 'http://httpbin.org/ip'
+            url = 'http://s.weibo.com/weibo/%%25E9%%259B%%25BE%%25E9%%259C%%25BE&typeall=1&suball=1&timescope=custom:2017-01-0%s:2017-01-0%s&Refer=g' % (a, a)
+            print(url)
+            yield Request(url = url, callback = self.parse0)
         
-        print(url)
-        yield Request(url = url, callback = self.parse0)
         
     
     def parse0(self, response):
@@ -37,7 +54,7 @@ class SinaSearchSpider(scrapy.Spider):
         except :
             print(selector.extract())
             raise Exception
-        
+        #将\\div替换为div
         result = re.sub(r'\\([^u])', r'\1', text)
         
         
@@ -53,13 +70,13 @@ class SinaSearchSpider(scrapy.Spider):
         mids = html.xpath('//div[@action-type = "feed_list_item"]/@mid').extract()
         nicknames = html.xpath('//div[@class = "content clearfix"]/div[@class = "feed_content wbcon"]/p/@nick-name').extract()
         profiles = html.xpath('//div[@class = "content clearfix"]/div[@class = "feed_content wbcon"]/a[@class = "W_texta W_fb"]/@href').extract()
-        userIds = html.xpath('//div[@class = "content clearfix"]/div[@class = "feed_content wbcon"]/a[@class = "W_texta W_fb"]/@usercard').re('id=(\d+)')
+        #userIds = html.xpath('//div[@class = "content clearfix"]/div[@class = "feed_content wbcon"]/a[@class = "W_texta W_fb"]/@usercard').re('id=(\d+)')
         contents = html.xpath('//div[@class = "content clearfix"]/div[@class = "feed_content wbcon"]/p').extract()
         dates = html.xpath('//div[@class = "feed_from W_textb"]/a[@class = "W_textb"]/text()').extract()
         froms = html.xpath('//div[@class = "feed_from W_textb"]/a[@rel = "nofollow"]/text()').extract()
-        forwards = html.xpath('//a[@action-type = "feed_list_forward"]/span').xpath('string(.)').extract()
-        comments = html.xpath('//a[@action-type = "feed_list_comment"]/span').xpath('string(.)').extract()
-        likes = html.xpath('//a[@action-type = "feed_list_like"]/span').xpath('string(.)').extract()
+        #forwards = html.xpath('//a[@action-type = "feed_list_forward"]/span').xpath('string(.)').extract()
+        #comments = html.xpath('//a[@action-type = "feed_list_comment"]/span').xpath('string(.)').extract()
+        #likes = html.xpath('//a[@action-type = "feed_list_like"]/span').xpath('string(.)').extract()
         
         
         profile_vs = html.xpath('//div[@class = "content clearfix"]/div[@class = "feed_content wbcon"]').extract()
@@ -80,8 +97,9 @@ class SinaSearchSpider(scrapy.Spider):
             else:
                  validates.append(0)  
 
-        items = zip(nicknames, profiles, contents, dates, froms, forwards, comments, likes, validates, mids, userIds)
-        
+        #items = zip(nicknames, profiles, contents, dates, froms, forwards, comments, likes, validates, mids, userIds)
+        items = zip(nicknames, profiles, contents, dates, froms, froms, froms, froms, validates, mids, froms)
+
         
         for i in items:
             item = SearchItem()
@@ -124,7 +142,7 @@ class SinaSearchSpider(scrapy.Spider):
                 
         next_page = html.xpath('//a[@class = "page next S_txt1 S_line1"]/@href').extract_first()
         if next_page is not None:
-            
-            next_page = 'http://s.weibo.com' + next_page
-            print(next_page)
-            yield scrapy.Request(next_page, callback=self.parse0)
+            #if not next_page.endswith('35'):
+                next_page = 'http://s.weibo.com' + next_page
+                print(next_page)
+                yield scrapy.Request(next_page, callback=self.parse0)
